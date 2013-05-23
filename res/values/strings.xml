@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Pass Me</string>
+    <string name="action_settings">Preferencias</string>
+    <string name="action_add_pass">Agregar cuenta</string>
+    <string name="action_edit_account">Editar cuenta</string>
+    <string name="account_name">Cuenta</string>
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Repetir Contraseña</string>
+    <string name="create">Crear</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="edit">Editar</string>
+    <string name="details">Detalles</string>
+    <string name="delete">Eliminar</string>
+    <string name="login">Ingresar</string>
+    <string name="tvExplain">Elija una contraseña que luego será usada cada vez que abra la aplicación.</string>
+    <string name="msg_pass_must_match">Las contraseñas deben coincidir.</string>
+    <string name="msg_wrong_pass">Contraseña errónea.</string>
+    <string name="title_activity_detail">Detalles</string>
+    <string name="title_first_time">Elegir contraseña</string>
+    <string name="title_alert">Atención</string>
+    <string name="title_login">Pass Me Login</string>
+    <string name="title_delete_account">Eliminar cuenta</string>
+    <string name="title_edit_account">Editar cuenta</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>

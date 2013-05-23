@@ -1,0 +1,34 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    
+    <TextView
+        android:id="@+id/tvExplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:textIsSelectable="true"
+        android:textSize="@dimen/commonLabelsSize"
+        android:text="@string/tvExplain"/>
+    
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:layout_marginTop="@dimen/labelsRowSeparation"
+        android:fontFamily="sans-serif"
+        android:hint="@string/password" />
+    
+    <EditText
+        android:id="@+id/edtConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:layout_marginTop="@dimen/labelsRowSeparation"
+        android:fontFamily="sans-serif"
+        android:hint="@string/confirm_password"/>
+    
+</LinearLayout>

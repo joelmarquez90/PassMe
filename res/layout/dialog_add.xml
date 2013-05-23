@@ -1,0 +1,43 @@
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    
+    <EditText
+        android:id="@+id/edtAccountName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:inputType="text"
+        android:hint="@string/account_name" />
+    
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/labelsRowSeparation"
+        android:fontFamily="sans-serif"
+        android:inputType="text|textEmailAddress"
+        android:hint="@string/username" />
+    
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/labelsRowSeparation"
+        android:fontFamily="sans-serif"
+        android:inputType="textPassword"
+        android:hint="@string/password"/>
+    
+    <EditText
+        android:id="@+id/edtDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/labelsRowSeparation"
+        android:fontFamily="sans-serif"
+        android:inputType="text"
+        android:hint="@string/details"/>
+    
+</LinearLayout>

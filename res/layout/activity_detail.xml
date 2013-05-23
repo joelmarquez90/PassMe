@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".DetailActivity" >
+    
+    <TextView
+        android:id="@+id/lblAccountName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:hint="@string/account_name" />
+    
+    <TextView
+        android:id="@+id/lblUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblAccountName"
+        android:layout_marginTop="@dimen/labelsRowSeparation2"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:hint="@string/username" />
+    
+    <TextView
+        android:id="@+id/lblPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblUsername"
+        android:layout_marginTop="@dimen/labelsRowSeparation2"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:hint="@string/password"/>
+    
+    <TextView
+        android:id="@+id/lblDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblPassword"
+        android:layout_marginTop="@dimen/labelsRowSeparation2"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:hint="@string/details"/>
+    
+    <TextView
+        android:id="@+id/lblAccountNameData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/lblAccountName"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:text="Facebook"/>
+    
+    <TextView
+        android:id="@+id/lblUsernameData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/lblUsername"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size" 
+        android:text="joe__marquez@hotmail.com"/>
+    
+    <TextView
+        android:id="@+id/lblPasswordData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/lblPassword"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:text="asdasdasdasd"/>
+    
+    <TextView
+        android:id="@+id/lblDetailsData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/lblDetails"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/text_size"
+        android:text="asdasdas"/>
+
+</RelativeLayout>

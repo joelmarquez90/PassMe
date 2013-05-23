@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_edit_account"
+        android:orderInCategory="20"
+        android:showAsAction="always"
+        android:title="@string/action_edit_account"
+        android:icon="@android:drawable/ic_menu_edit"/>
+
+</menu>
