@@ -3,6 +3,8 @@ package ar.marquez.passme.model;
 import java.util.ArrayList;
 import android.content.Context;
 
+import ar.marquez.passme.database.DataBaseManager;
+
 public class AccountManager {
 
 	private DataBaseManager dbManager;

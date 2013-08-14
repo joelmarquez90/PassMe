@@ -1,13 +1,5 @@
-package ar.marquez.passme.model;
+package ar.marquez.passme.database;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,13 +8,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * An example database that records the state of each purchase. You should use
- * an obfuscator before storing any information to persistent storage. The
- * obfuscator should use a key that is specific to the device and/or user.
- * Otherwise an attacker could copy a database full of valid purchases and
- * distribute it to others.
- */
+import java.util.ArrayList;
+
+import ar.marquez.passme.model.AccountEntity;
+import ar.marquez.passme.model.PassMeApplication;
+
+import static ar.marquez.passme.model.PassMeApplication.getModel;
+
 public class DataBaseManager {
 	public static final String TAG = "DataBaseManager";
 
@@ -42,24 +34,8 @@ public class DataBaseManager {
 		if (mDatabaseHelper == null)
 			mDatabaseHelper = new DatabaseHelper(PassMeApplication.getContext());
 
-		if (mDb != null && mDb.isOpen() == false)
+		if (mDb != null && !mDb.isOpen())
 			mDb = mDatabaseHelper.getWritableDatabase();
-	}
-
-	public void init() {
-
-	}
-
-	public void close() {
-		mDatabaseHelper.close();
-	}
-
-	public void copyDataBase() throws IOException {
-		mDatabaseHelper.copyDataBase(mDb.getPath());
-	}
-
-	public void clearDataBase() {
-		mDatabaseHelper.onUpgrade(mDb, 1, 2);
 	}
 
 	public ArrayList<AccountEntity> getAccountList() {
@@ -78,7 +54,7 @@ public class DataBaseManager {
 		}
 
 		if (result != null && cursor.getCount() > 0) {
-			AccountEntity newItem = null;
+			AccountEntity newItem;
 			Log.i(TAG, "getAccountList(): Adding stored accounts");
 
 			while (cursor.moveToNext()) {
@@ -95,26 +71,13 @@ public class DataBaseManager {
 		return result;
 	}
 
-	/*
-	 * public boolean setAccountList(ArrayList<AccountEntity> accountList) {
-	 * boolean bResult = true;
-	 * 
-	 * clearDataBase();
-	 * 
-	 * for (Iterator<AccountEntity> it = accountList.iterator(); it.hasNext();)
-	 * { AccountEntity account = (AccountEntity) it.next(); if
-	 * (insertAccount(account) == false) { bResult = false; } }
-	 * 
-	 * return bResult; }
-	 */
-
 	public boolean insertAccount(AccountEntity account) {
 		long result = -1L;
 
 		ContentValues values = new ContentValues();
 		values.put(AccountEntity.ACCOUNT_ACCOUNT_NAME, account.getAccountName());
 		values.put(AccountEntity.ACCOUNT_USERNAME, account.getUserName());
-		values.put(AccountEntity.ACCOUNT_PASSWORD, account.getPassword());
+		values.put(AccountEntity.ACCOUNT_PASSWORD, encrypt(account.getPassword()));
 		values.put(AccountEntity.ACCOUNT_DETAIL, account.getDetail());
 
 		try {
@@ -128,7 +91,11 @@ public class DataBaseManager {
 		return result != -1L;
 	}
 
-	public void removeAccount(AccountEntity account) {
+    private String encrypt(String password) {
+        return PasswordUtil.encryptWrapper(getModel().getMasterPassword(), password);
+    }
+
+    public void removeAccount(AccountEntity account) {
 		try {
 			Log.i(TAG, "removeAccount(): " + account.toString());
 
@@ -148,7 +115,7 @@ public class DataBaseManager {
 						+ account.getAccountName() + "'");
 
 		ContentValues values = new ContentValues();
-		values.put(AccountEntity.ACCOUNT_PASSWORD, account.getPassword());
+		values.put(AccountEntity.ACCOUNT_PASSWORD, encrypt(account.getPassword()));
 		values.put(AccountEntity.ACCOUNT_DETAIL, account.getDetail());
 
 		try {
@@ -167,30 +134,26 @@ public class DataBaseManager {
 				+ "='" + accountAccountName + "'");
 
 		Cursor cursor = null;
-		boolean bResult = true;
 
-		try {
+        try {
 			cursor = mDb.query(AccountEntity.ACCOUNT_TABLE_NAME,
 					AccountEntity.ACCOUNT_COLUMNS,
 					AccountEntity.ACCOUNT_ACCOUNT_NAME + "='" + accountAccountName
 							+ "'", null, null, null, null);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			bResult = false;
-		}
+        }
 
-		Log.i(TAG, "cursor.getCount(): " + String.valueOf(cursor.getCount()));
-		if (bResult == true && cursor.getCount() > 0) {
+        assert cursor != null;
+        Log.i(TAG, "cursor.getCount(): " + String.valueOf(cursor.getCount()));
+		if (cursor.getCount() > 0) {
 			cursor.moveToNext();
-			AccountEntity ret = new AccountEntity(cursor);
-			return ret;
+            return new AccountEntity(cursor);
 		}
 
-		if (cursor != null) {
-			cursor.close();
-		}
+        cursor.close();
 
-		return null;
+        return null;
 	}
 
 	/**
@@ -221,31 +184,6 @@ public class DataBaseManager {
 					+ AccountEntity.ACCOUNT_USERNAME + " TEXT, "
 					+ AccountEntity.ACCOUNT_PASSWORD + " TEXT, "
 					+ AccountEntity.ACCOUNT_DETAIL + " TEXT)");
-		}
-
-		/**
-		 * Copies your database from your local assets-folder to the just
-		 * created empty database in the system folder, from where it can be
-		 * accessed and handled. This is done by transfering bytestream.
-		 * */
-		private void copyDataBase(String dbFile) throws IOException {
-			InputStream myInput = new FileInputStream(dbFile);
-
-			File xmlFile = null; // path generator.
-			xmlFile = new File("db.xml");
-			OutputStream myOutput = new FileOutputStream(xmlFile);
-
-			// transfer bytes from the inputfile to the outputfile
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = myInput.read(buffer)) > 0) {
-				myOutput.write(buffer, 0, length);
-			}
-
-			// Close the streams
-			myOutput.flush();
-			myOutput.close();
-			myInput.close();
 		}
 	}
 }

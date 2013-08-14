@@ -1,4 +1,4 @@
-package ar.marquez.passme;
+package ar.marquez.passme.activity;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -12,8 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import ar.marquez.passme.R;
 import ar.marquez.passme.model.AccountEntity;
 import ar.marquez.passme.model.PassMeApplication;
 
@@ -44,7 +45,8 @@ public class DetailActivity extends Activity {
 		lblDetailsData = (TextView) findViewById(R.id.lblDetailsData);
 
 		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	private void setDataSource() {
@@ -85,7 +87,8 @@ public class DetailActivity extends Activity {
 								Log.i(TAG,
 										"onClick() from buildEditAccountDialog()");
 
-								EditText edtPassword = (EditText) view
+                                assert view != null;
+                                EditText edtPassword = (EditText) view
 										.findViewById(R.id.edtPassword);
 								accountEnt.setPassword(edtPassword.getText()
 										.toString());

@@ -1,12 +1,11 @@
-package ar.marquez.passme;
+package ar.marquez.passme.activity;
 
-import java.util.ArrayList;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,9 +13,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import ar.marquez.passme.R;
+import ar.marquez.passme.adapter.AccountAdapter;
 import ar.marquez.passme.model.AccountEntity;
 import ar.marquez.passme.model.Consts;
-import ar.marquez.passme.model.PassMeApplication;
+
+import static ar.marquez.passme.model.PassMeApplication.getAccountManager;
+import static ar.marquez.passme.model.PassMeApplication.getModel;
+import static ar.marquez.passme.model.PassMeApplication.getPrefs;
 
 public class MainActivity extends Activity {
 	public static final String TAG = "MainActivity";
@@ -43,23 +50,23 @@ public class MainActivity extends Activity {
 				new ArrayList<AccountEntity>(), this);
 		accountList.setAdapter(accountAdapter);
 
-		if (isFirstTimeApp() == true) {
+		if (isFirstTimeApp()) {
 			buildFirstTimeDialog();
-		} else if (PassMeApplication.getModel().mIsLocked)
+		} else if (getModel().mIsLocked)
 			buildValidationDialog();
 		else
 			fillAccountList();
 	}
 
 	private boolean isFirstTimeApp() {
-		boolean ret = false;
+		boolean ret;
 
-		ret = PassMeApplication.getPrefs().getBoolean(Consts.FIRST_TIME_APP,
+		ret = getPrefs().getBoolean(Consts.FIRST_TIME_APP,
 				true);
-		if (ret == true) {
+		if (ret) {
 			Log.i(TAG, "isFirstTimeApp()");
 
-			Editor editor = PassMeApplication.getPrefs().edit();
+			Editor editor = getPrefs().edit();
 			editor.putBoolean(Consts.FIRST_TIME_APP, false);
 			editor.commit();
 		}
@@ -68,8 +75,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void fillAccountList() {
-		ArrayList<AccountEntity> accountListItems = PassMeApplication
-				.getAccountManager().getAllAccounts();
+		ArrayList<AccountEntity> accountListItems = getAccountManager().getAllAccounts();
 
 		Log.i(TAG, "fillAccountList(): " + accountListItems.size()
 				+ " items on database");
@@ -135,13 +141,9 @@ public class MainActivity extends Activity {
 										.toString()
 										.equals(edtConfirmPassword.getText()
 												.toString())) {
-									Editor editor = PassMeApplication
-											.getPrefs().edit();
-									editor.putString(Consts.MASTER_PASSWORD,
-											edtPassword.getText().toString());
-									editor.commit();
+                                        getModel().saveMasterPassword(edtPassword.getText().toString());
 								} else {
-									AlertDialog myAlertDialog = null;
+									AlertDialog myAlertDialog;
 									AlertDialog.Builder builder = new AlertDialog.Builder(
 											MainActivity.this);
 									builder.setMessage(
@@ -188,15 +190,12 @@ public class MainActivity extends Activity {
 								EditText edtPassword = (EditText) view
 										.findViewById(R.id.edtPassword);
 
-								String pass = PassMeApplication.getPrefs()
-										.getString(Consts.MASTER_PASSWORD, "");
+								String pass = getModel().getMasterPassword();
 								if (pass.equals(edtPassword.getText()
 										.toString())) {
-									// PassMeApplication.getModel().mIsLocked =
-									// false;
 									fillAccountList();
 								} else {
-									AlertDialog myAlertDialog = null;
+									AlertDialog myAlertDialog;
 									AlertDialog.Builder builder = new AlertDialog.Builder(
 											MainActivity.this);
 									builder.setMessage(getString(R.string.msg_wrong_pass));
@@ -257,8 +256,8 @@ public class MainActivity extends Activity {
 								accountEnt.setDetail(edtDetails.getText()
 										.toString());
 
-								if (PassMeApplication.getAccountManager()
-										.addAccount(accountEnt) == false) {
+								if (!getAccountManager()
+                                        .addAccount(accountEnt)) {
 									buildConfirm2Dialog(accountEnt);
 								} else {
 									fillAccountList();
@@ -298,7 +297,7 @@ public class MainActivity extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				switch (which) {
 				case DialogInterface.BUTTON_POSITIVE:
-					PassMeApplication.getAccountManager().remove(entity);
+					getAccountManager().remove(entity);
 					fillAccountList();
 					buildOKDialog(entity);
 					break;
@@ -311,7 +310,7 @@ public class MainActivity extends Activity {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(
-				"¿Está seguro que desea eliminar la cuenta \""
+				"ï¿½Estï¿½ seguro que desea eliminar la cuenta \""
 						+ entity.getAccountName()
 						+ "\" de la lista de cuentas?")
 				.setPositiveButton(R.string.accept, updateDialog)
@@ -346,7 +345,7 @@ public class MainActivity extends Activity {
 
 	private void buildOKDialog(AccountEntity entity) {
 		Log.i(TAG, "buildOKDialog()");
-		AlertDialog myAlertDialog = null;
+		AlertDialog myAlertDialog;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Se ha borrado la cuenta \""
 				+ entity.getAccountName() + "\" de la lista de cuentas.");
@@ -360,13 +359,13 @@ public class MainActivity extends Activity {
 		myAlertDialog.show();
 	}
 
-	public void btnDetailsClick(AccountEntity entity) {
+	public void btnDetailsClick() {
 		startActivity(new Intent(this, DetailActivity.class));
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		PassMeApplication.getModel().mIsLocked = true;
+		getModel().mIsLocked = true;
 	}
 }

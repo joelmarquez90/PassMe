@@ -2,6 +2,10 @@ package ar.marquez.passme.model;
 
 import android.database.Cursor;
 
+import ar.marquez.passme.database.PasswordUtil;
+
+import static ar.marquez.passme.model.PassMeApplication.getModel;
+
 public class AccountEntity {
 	// DATABASE DEFINITION
 	static public final String ACCOUNT_TABLE_NAME = "account";
@@ -29,7 +33,7 @@ public class AccountEntity {
 	public AccountEntity(Cursor cursor) {
 		this.accountName = cursor.getString(0);
 		this.userName = cursor.getString(1);
-		this.password = cursor.getString(2);
+		this.password = PasswordUtil.decryptWrapper(getModel().getMasterPassword(),cursor.getString(2));
 		this.detail = cursor.getString(3);
 	}
 

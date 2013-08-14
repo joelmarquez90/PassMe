@@ -1,4 +1,4 @@
-package ar.marquez.passme;
+package ar.marquez.passme.adapter;
 
 import java.util.ArrayList;
 import android.app.Activity;
@@ -11,6 +11,9 @@ import android.view.View.OnLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import ar.marquez.passme.R;
+import ar.marquez.passme.activity.MainActivity;
 import ar.marquez.passme.model.AccountEntity;
 import ar.marquez.passme.model.PassMeApplication;
 
@@ -43,7 +46,8 @@ public class AccountAdapter extends ArrayAdapter<AccountEntity> {
 			accountRow = inflater.inflate(R.layout.list_accounts_row, parent,
 					false);
 
-			accountHolder.lblUserName = (TextView) accountRow
+            assert accountRow != null;
+            accountHolder.lblUserName = (TextView) accountRow
 					.findViewById(R.id.lblUserName);
 			accountHolder.lblAccountName = (TextView) accountRow
 					.findViewById(R.id.lblAccountName);
@@ -119,7 +123,7 @@ public class AccountAdapter extends ArrayAdapter<AccountEntity> {
 				adapter._selectedIndex = index;
 				notifyDataSetChanged();
 
-				activity.btnDetailsClick(entity);
+				activity.btnDetailsClick();
 
 				PassMeApplication.getModel().mSelectedAccountEntity = entity;
 			}
