@@ -1,4 +1,4 @@
-package ar.marquez.passme;
+package ar.marquez.passme.activity;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
@@ -21,6 +21,8 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import java.util.List;
+
+import ar.marquez.passme.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
