@@ -59,6 +59,7 @@ public class DataBaseManager {
 
 			while (cursor.moveToNext()) {
 				newItem = new AccountEntity(cursor);
+                newItem.setPassword(PasswordUtil.decryptWrapper(getModel().getMasterPassword(), newItem.getPassword()));
 				result.add(newItem);
 				Log.i(TAG, "getAccountList(): " + newItem.toString());
 			}

@@ -33,7 +33,7 @@ public class AccountEntity {
 	public AccountEntity(Cursor cursor) {
 		this.accountName = cursor.getString(0);
 		this.userName = cursor.getString(1);
-		this.password = PasswordUtil.decryptWrapper(getModel().getMasterPassword(),cursor.getString(2));
+		this.password = cursor.getString(2);
 		this.detail = cursor.getString(3);
 	}
 
