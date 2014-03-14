@@ -1,4 +1,4 @@
-package ar.marquez.passme.activity;
+package ar.marquez.passmenew.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,14 +16,14 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ar.marquez.passme.R;
-import ar.marquez.passme.adapter.AccountAdapter;
-import ar.marquez.passme.model.AccountEntity;
-import ar.marquez.passme.model.Consts;
+import ar.marquez.passmenew.R;
+import ar.marquez.passmenew.adapter.AccountAdapter;
+import ar.marquez.passmenew.model.AccountEntity;
+import ar.marquez.passmenew.model.Consts;
 
-import static ar.marquez.passme.model.PassMeApplication.getAccountManager;
-import static ar.marquez.passme.model.PassMeApplication.getModel;
-import static ar.marquez.passme.model.PassMeApplication.getPrefs;
+import static ar.marquez.passmenew.model.PassMeApplication.getAccountManager;
+import static ar.marquez.passmenew.model.PassMeApplication.getModel;
+import static ar.marquez.passmenew.model.PassMeApplication.getPrefs;
 
 public class MainActivity extends Activity {
 	public static final String TAG = "MainActivity";
@@ -100,14 +100,14 @@ public class MainActivity extends Activity {
 		Log.i(TAG, "onOptionsItemSelected(): selected item " + title);
 
 		// Settings button
-		if (title.equals(getString(ar.marquez.passme.R.string.action_settings))) {
+		if (title.equals(getString(R.string.action_settings))) {
 			startActivity(new Intent(this, SettingsActivity.class));
 			return true;
 		}
 
 		// Add account button
 		else if (title
-				.equals(getString(ar.marquez.passme.R.string.action_add_pass))) {
+				.equals(getString(R.string.action_add_pass))) {
 			buildAddAccountDialog();
 			return true;
 		}

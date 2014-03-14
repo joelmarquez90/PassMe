@@ -1,4 +1,4 @@
-package ar.marquez.passme.database;
+package ar.marquez.passmenew.database;
 
 import android.util.Base64;
 

@@ -1,9 +1,9 @@
-package ar.marquez.passme.model;
+package ar.marquez.passmenew.model;
 
 import java.util.ArrayList;
 import android.content.Context;
 
-import ar.marquez.passme.database.DataBaseManager;
+import ar.marquez.passmenew.database.DataBaseManager;
 
 public class AccountManager {
 

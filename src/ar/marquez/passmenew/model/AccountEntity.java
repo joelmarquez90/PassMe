@@ -1,10 +1,10 @@
-package ar.marquez.passme.model;
+package ar.marquez.passmenew.model;
 
 import android.database.Cursor;
 
-import ar.marquez.passme.database.PasswordUtil;
+import ar.marquez.passmenew.database.PasswordUtil;
 
-import static ar.marquez.passme.model.PassMeApplication.getModel;
+import static ar.marquez.passmenew.model.PassMeApplication.getModel;
 
 public class AccountEntity {
 	// DATABASE DEFINITION

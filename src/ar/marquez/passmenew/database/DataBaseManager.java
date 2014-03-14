@@ -1,4 +1,4 @@
-package ar.marquez.passme.database;
+package ar.marquez.passmenew.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,10 +10,10 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import ar.marquez.passme.model.AccountEntity;
-import ar.marquez.passme.model.PassMeApplication;
+import ar.marquez.passmenew.model.AccountEntity;
+import ar.marquez.passmenew.model.PassMeApplication;
 
-import static ar.marquez.passme.model.PassMeApplication.getModel;
+import static ar.marquez.passmenew.model.PassMeApplication.getModel;
 
 public class DataBaseManager {
 	public static final String TAG = "DataBaseManager";

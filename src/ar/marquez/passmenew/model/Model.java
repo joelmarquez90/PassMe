@@ -1,8 +1,8 @@
-package ar.marquez.passme.model;
+package ar.marquez.passmenew.model;
 
 import android.content.SharedPreferences;
 
-import static ar.marquez.passme.model.PassMeApplication.getPrefs;
+import static ar.marquez.passmenew.model.PassMeApplication.getPrefs;
 
 public class Model {
 	public AccountEntity mSelectedAccountEntity;

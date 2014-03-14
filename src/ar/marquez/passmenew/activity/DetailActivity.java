@@ -1,4 +1,4 @@
-package ar.marquez.passme.activity;
+package ar.marquez.passmenew.activity;
 
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -14,9 +14,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import ar.marquez.passme.R;
-import ar.marquez.passme.model.AccountEntity;
-import ar.marquez.passme.model.PassMeApplication;
+import ar.marquez.passmenew.R;
+import ar.marquez.passmenew.model.AccountEntity;
+import ar.marquez.passmenew.model.PassMeApplication;
 
 public class DetailActivity extends Activity {
 	public static final String TAG = "DetailActivity";
@@ -138,7 +138,7 @@ public class DetailActivity extends Activity {
 		}
 		// edit button
 		if (title
-				.equals(getString(ar.marquez.passme.R.string.action_edit_account))) {
+				.equals(getString(R.string.action_edit_account))) {
 			buildEditAccountDialog();
 			return true;
 		}

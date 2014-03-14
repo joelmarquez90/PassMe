@@ -1,4 +1,4 @@
-package ar.marquez.passme.model;
+package ar.marquez.passmenew.model;
 
 public class Consts {
 

@@ -1,4 +1,4 @@
-package ar.marquez.passme.adapter;
+package ar.marquez.passmenew.adapter;
 
 import java.util.ArrayList;
 import android.app.Activity;
@@ -12,10 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import ar.marquez.passme.R;
-import ar.marquez.passme.activity.MainActivity;
-import ar.marquez.passme.model.AccountEntity;
-import ar.marquez.passme.model.PassMeApplication;
+import ar.marquez.passmenew.R;
+import ar.marquez.passmenew.activity.MainActivity;
+import ar.marquez.passmenew.model.AccountEntity;
+import ar.marquez.passmenew.model.PassMeApplication;
 
 // -------- ADAPTER CLASS ---------  
 // --------------------------------
